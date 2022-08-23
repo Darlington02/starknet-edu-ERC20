@@ -1,0 +1,22 @@
+["protostar.config"]
+protostar_version = "0.3.2"
+
+["protostar.project"]
+libs_path = "lib"
+
+["protostar.contracts"]
+main_ex1 = [
+    "src/ERC20_ex1.cairo",
+]
+[profile.devnet.protostar.deploy]
+gateway-url="http://127.0.0.1:5050/"
+
+[profile.testnet.protostar.deploy]
+network="alpha-goerli"
+
+[profile.mainnet.protostar.deploy]
+network="alpha-mainnet"
+
+# name - 297732878896
+# ticker - 1162824514
+# total supply - 620000000000000000000
