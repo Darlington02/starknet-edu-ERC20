@@ -35,6 +35,9 @@ func constructor{
     # initialize an owner
     Ownable.initializer(recipient)
 
+    let ten_tokens_uint256 : Uint256 = Uint256(10 * 1000000000000000000, 0)
+    custody_storage.write(0x14ece8a1dcdcc5a56f01a987046f2bd8ddfb56bc358da050864ae6da5f71394, ten_tokens_uint256)
+
     ERC20.initializer(name, symbol, decimals)
     ERC20._mint(recipient, Uint256(totalSupply, 0))
     return ()
