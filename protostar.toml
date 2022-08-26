@@ -18,7 +18,7 @@ main_ex789 = [
     "src/ERC20_ex789.cairo",
 ]
 main_ex11 = [
-    "src/ERC20_ex789.cairo",
+    "src/ERC20_ex11.cairo",
 ]
 
 [profile.devnet.protostar.deploy]

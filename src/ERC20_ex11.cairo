@@ -22,7 +22,7 @@ from src.IDTKERC20 import IDTKERC20
 end
 
 @storage_var
-    func custody_storage(account: felt) -> (amount: felt):
+    func custody_storage(account: felt) -> (amount: Uint256):
 end
 
 @constructor
@@ -222,21 +222,15 @@ func get_tokens_from_contract{
         range_check_ptr
     }() -> (amount: Uint256):
     # call IDTKERC20 faucet
-    IDTKERC20.faucet()
+    IDTKERC20.faucet(0x66aa72ce2916bbfc654fd18f9c9aaed29a4a678274639a010468a948a5e2a96)
     let mintedAmount : Uint256 = Uint256(100000000000000000000,0)
 
-    # check if caller exist in custody storage, and add address if it doesnt
+    # get caller and prevAmount
     let (caller) = get_caller_address()
     let (prevAmount) = custody_storage.read(caller)
 
-    if prevAmount == 0:
-        custody_storage.write(caller, mintedAmount)
-        return (mintedAmount)
-    end
-
-    # else update custody storage with new amount
-    let prevAmount_as_uint256: Uint256 = Uint256(prevAmount, 0)
-    let (newAmount) = uint256_add(prevAmount, mintedAmount)
+    # update custody storage with new amount
+    let (newAmount, _) = uint256_add(prevAmount, mintedAmount)
     custody_storage.write(caller, newAmount)
     return (mintedAmount)
 end
