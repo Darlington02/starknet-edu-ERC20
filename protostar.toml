@@ -14,6 +14,10 @@ main_ex3 = [
 main_ex456 = [
     "src/ERC20_ex456.cairo",
 ]
+main_ex789 = [
+    "src/ERC20_ex789.cairo",
+]
+
 [profile.devnet.protostar.deploy]
 gateway-url="http://127.0.0.1:5050/"
 
