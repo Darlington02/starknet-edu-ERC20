@@ -8,6 +8,12 @@ libs_path = "lib"
 main_ex1 = [
     "src/ERC20_ex1.cairo",
 ]
+main_ex3 = [
+    "src/ERC20_ex3.cairo",
+]
+main_ex456 = [
+    "src/ERC20_ex456.cairo",
+]
 [profile.devnet.protostar.deploy]
 gateway-url="http://127.0.0.1:5050/"
 

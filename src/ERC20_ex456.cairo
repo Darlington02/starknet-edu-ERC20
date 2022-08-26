@@ -15,6 +15,10 @@ from openzeppelin.access.ownable.library import Ownable
 # Constructor
 #
 
+@storage_var
+    func allowlist(account: felt) -> (level: felt):
+end
+
 @constructor
 func constructor{
         syscall_ptr : felt*,
@@ -94,6 +98,17 @@ func allowance{
     return (remaining)
 end
 
+@view
+func allowlist_level{
+        syscall_ptr : felt*,
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }(account: felt) -> (level: felt):
+    # check
+    let (level) = allowlist.read(account)
+    return (level)
+end
+
 
 # 
 # EXTERNALS
@@ -127,4 +142,38 @@ func approve{
     }(spender: felt, amount: Uint256):
     ERC20.approve(spender, amount)
     return()
+end
+
+@external
+func request_allowlist{
+        syscall_ptr : felt*,
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }() -> (level_granted: felt):
+    # get caller address
+    let (caller) = get_caller_address()
+    # add caller to allowlist
+    allowlist.write(caller, 1)
+    return (1)
+end
+
+@external
+func get_tokens{
+        syscall_ptr : felt*,
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }() -> (amount: Uint256):
+    # get recipient
+    let (recipient) = get_caller_address()
+
+    # check recipient exist in allowlist
+    let (level) = allowlist.read(recipient)
+
+    # mint if allowed
+    if level == 1:
+        let mintAmount: Uint256 = Uint256(100, 0)
+        ERC20._mint(recipient, mintAmount)
+        return (mintAmount)
+    end
+    return (Uint256(0,0))
 end

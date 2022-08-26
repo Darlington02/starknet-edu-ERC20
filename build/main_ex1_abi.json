@@ -84,11 +84,11 @@
                 "type": "felt"
             },
             {
-                "name": "totalSupply",
-                "type": "Uint256"
+                "name": "recipient",
+                "type": "felt"
             },
             {
-                "name": "owner",
+                "name": "totalSupply",
                 "type": "felt"
             }
         ],
@@ -122,7 +122,7 @@
     },
     {
         "inputs": [],
-        "name": "total_supply",
+        "name": "totalSupply",
         "outputs": [
             {
                 "name": "total_supply",
@@ -151,7 +151,7 @@
                 "type": "felt"
             }
         ],
-        "name": "balance_of",
+        "name": "balanceOf",
         "outputs": [
             {
                 "name": "balance",
@@ -212,7 +212,7 @@
                 "type": "Uint256"
             }
         ],
-        "name": "transfer_from",
+        "name": "transferFrom",
         "outputs": [],
         "type": "function"
     },

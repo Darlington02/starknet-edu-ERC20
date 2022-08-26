@@ -128,3 +128,17 @@ func approve{
     ERC20.approve(spender, amount)
     return()
 end
+
+@external
+func get_tokens{
+        syscall_ptr : felt*,
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }() -> (amount: Uint256):
+    let (recipient) = get_caller_address()
+
+    let mintAmount: Uint256 = Uint256(100, 0) 
+    ERC20._mint(recipient, mintAmount)
+
+    return (mintAmount)
+end
